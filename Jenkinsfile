@@ -14,9 +14,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                dir('app') {
-                    sh 'docker build -t $IMAGE_NAME .'
-                }
+                sh 'docker build -t $IMAGE_NAME .'
             }
         }
 
@@ -28,12 +26,11 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                dir('k8s') {
-                    sh 'kubectl apply -f .'
-                }
+                sh 'kubectl apply -f k8s/'
             }
         }
     }
 }
+
 
 
