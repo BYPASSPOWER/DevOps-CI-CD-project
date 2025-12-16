@@ -1,5 +1,3 @@
-groovy
-Copy code
 pipeline {
     agent any
 
@@ -8,15 +6,11 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME .'
+                dir('app') {
+                    sh 'docker build -t $IMAGE_NAME .'
+                }
             }
         }
 
@@ -33,6 +27,7 @@ pipeline {
         }
     }
 }
+
 
 
 
